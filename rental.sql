@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2024 at 06:16 AM
+-- Generation Time: May 21, 2024 at 04:54 AM
 -- Server version: 10.4.21-MariaDB-log
 -- PHP Version: 8.0.11
 
@@ -47,7 +47,10 @@ INSERT INTO `mobil` (`idMobil`, `namaMobil`, `merek`, `model`, `jenis`, `noPlat`
 (2, 'Mobil 2', 'Merk A', 'Model S', 'Sedan', 'BN 7867 WW', 200000, 'Vacant'),
 (3, 'Mobil 3', 'Merk B', 'Model A', 'Sportcar', 'BN 8978 WL', 500000, 'Vacant'),
 (4, 'Mobil 4', 'Merk F', 'Model K', 'Sportcar', 'BN 7807 WW', 500000, 'Rented'),
-(5, 'Mobil 5', 'Merk G', 'Model E', 'SUV', 'BN 9909 WS', 300000, 'Vacant');
+(5, 'Mobil 5', 'Merk G', 'Model E', 'SUV', 'BN 9909 WS', 300000, 'Vacant'),
+(6, 'Mobil 6', 'Merk G', 'Model E', 'SUV', 'BN 9900 WS', 300000, 'Vacant'),
+(7, 'Mobil 6', 'Merk G', 'Model E', 'SUV', 'BN 9900 WS', 300000, 'Vacant'),
+(8, 'Mobil 7', 'Merk G', 'Model E', 'SUV', 'BN 9902 WS', 300000, 'Vacant');
 
 -- --------------------------------------------------------
 
@@ -78,7 +81,11 @@ INSERT INTO `peminjamman` (`idPeminjamman`, `idUser`, `idMobil`, `tanggalMulai`,
 (6, 1, 2, '2024-05-24', '2024-05-31', 1400000, 'Berlangsung'),
 (7, 1, 1, '2024-05-16', '2024-05-21', 1500000, 'Berlangsung'),
 (8, 1, 1, '2024-05-16', '2024-05-18', 600000, 'Berlangsung'),
-(9, 1, 2, '2024-05-10', '2024-05-20', 2000000, 'Selesai');
+(9, 1, 2, '2024-05-10', '2024-05-20', 2000000, 'Selesai'),
+(10, 7, 1, '2024-05-01', '2024-05-31', 9000000, 'Selesai'),
+(11, 6, 3, '2024-05-25', '2024-05-30', 2500000, 'Berlangsung'),
+(12, 7, 1, '2024-05-23', '2024-05-30', 2100000, 'Berlangsung'),
+(13, 7, 1, '2024-05-23', '2024-05-30', 2100000, 'Berlangsung');
 
 -- --------------------------------------------------------
 
@@ -103,7 +110,8 @@ CREATE TABLE `transaksi` (
 INSERT INTO `transaksi` (`idTransaksi`, `idPeminjamman`, `idUser`, `idMobil`, `tanggalSewa`, `tanggalKembali`, `status`) VALUES
 (1, 1, 1, 1, '2024-05-17', '2024-05-18', 'Selesai'),
 (2, 2, 2, 2, '2024-05-17', '2024-05-18', 'Selesai'),
-(3, 9, 1, 2, '2024-05-10', '2024-05-20', 'Selesai');
+(3, 9, 1, 2, '2024-05-10', '2024-05-20', 'Selesai'),
+(4, 10, 7, 1, '2024-05-01', '2024-05-31', 'Selesai');
 
 -- --------------------------------------------------------
 
@@ -115,7 +123,7 @@ CREATE TABLE `user` (
   `idUser` int(11) NOT NULL,
   `namaUser` varchar(200) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `noHP` int(14) NOT NULL,
   `noSIM` int(16) NOT NULL,
   `hakAkses` varchar(10) NOT NULL
@@ -126,11 +134,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`idUser`, `namaUser`, `email`, `password`, `noHP`, `noSIM`, `hakAkses`) VALUES
-(1, 'William', 'W@email.com', '123', 8000000, 800000, 'Admin'),
-(2, 'WF', 'wf@gmail.com', '123', 8000000, 800000, 'Admin'),
-(3, 'williamf', 'williamferdinand@gmail.com', '123', 80000000, 89000000, 'User'),
-(4, 'williamfe', 'williamff@gmail.com', '12', 80000000, 89000000, 'User'),
-(5, 'williambaru', 'williambaru@gmail.com', '1234', 80000000, 89000000, 'User');
+(6, 'williambaru', 'williambaru1@gmail.com', '$2y$10$7i/VKcITWQ9jwCAiN/kw7.edDK0PU9SErk6Trb/gEsyV5duBsctDm', 80000000, 89000000, 'User'),
+(7, 'williambaru', 'williambaru2@gmail.com', '$2y$10$OuhSf04/kKuQk68QiuvOd.38ErgIJhPqa1GSZreZN.HfnVxSEaiTC', 80000000, 89000000, 'Admin'),
+(8, 'williambaru3', 'williambaru3@gmail.com', '$2y$10$TzqwaN3ouZJTzMpuoToi0.uFg6BYWHZWGY38bKAJ2ba.GCQ4gktv.', 80000000, 89000000, 'User');
 
 --
 -- Indexes for dumped tables
@@ -174,25 +180,25 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `mobil`
 --
 ALTER TABLE `mobil`
-  MODIFY `idMobil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idMobil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `peminjamman`
 --
 ALTER TABLE `peminjamman`
-  MODIFY `idPeminjamman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idPeminjamman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `idTransaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idTransaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
